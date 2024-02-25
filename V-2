@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+#define PI 3.14159265
+
+void calcularFuerza(float magnitud, float angulo, char direccion[], float *fuerza_x, float *fuerza_y) {
+    angulo += (strcmp(direccion, "derecha hacia arriba") == 0) ? 0 :
+              (strcmp(direccion, "izquierda hacia arriba") == 0) ? 90 :
+              (strcmp(direccion, "izquierda hacia abajo") == 0) ? 180 : 270;
+
+    float angulo_radianes = angulo * PI / 180;
+
+    *fuerza_x = magnitud * cos(angulo_radianes);
+    *fuerza_y = magnitud * sin(angulo_radianes);
+}
+
+int main() {
+    float magnitud1, angulo1, magnitud2, angulo2;
+    char direccion1[50], direccion2[50];
+
+    printf("Ingrese la magnitud de la fuerza 1: ");
+    scanf("%f", &magnitud1);
+    printf("Ingrese el angulo de la fuerza 1 en grados: ");
+    scanf("%f", &angulo1);
+    printf("Elija la direccion de la fuerza 1:\n");
+    printf("1. Derecha hacia arriba (+x)\n");
+    printf("2. Izquierda hacia arriba (-x)\n");
+    printf("3. Izquierda hacia abajo (+y)\n");
+    printf("4. Derecha hacia abajo (-y)\n");
+    printf("Ingrese el numero correspondiente: ");
+    int opcion1;
+    scanf("%d", &opcion1);
+    switch (opcion1) {
+        case 1:
+            strcpy(direccion1, "derecha hacia arriba");
+            break;
+        case 2:
+            strcpy(direccion1, "izquierda hacia arriba");
+            break;
+        case 3:
+            strcpy(direccion1, "izquierda hacia abajo");
+            break;
+        case 4:
+            strcpy(direccion1, "derecha hacia abajo");
+            break;
+        default:
+            printf("Opcion invalida.\n");
+            return 1;
+    }
+
+    printf("Ingrese la magnitud de la fuerza 2: ");
+    scanf("%f", &magnitud2);
+    printf("Ingrese el angulo de la fuerza 2 en grados: ");
+    scanf("%f", &angulo2);
+    printf("Elija la direccion de la fuerza 2:\n");
+    printf("1. Derecha hacia arriba (+x)\n");
+    printf("2. Izquierda hacia arriba (-x)\n");
+    printf("3. Izquierda hacia abajo (+y)\n");
+    printf("4. Derecha hacia abajo (-y)\n");
+    printf("Ingrese el numero correspondiente: ");
+    int opcion2;
+    scanf("%d", &opcion2);
+    switch (opcion2) {
+        case 1:
+            strcpy(direccion2, "derecha hacia arriba");
+            break;
+        case 2:
+            strcpy(direccion2, "izquierda hacia arriba");
+            break;
+        case 3:
+            strcpy(direccion2, "izquierda hacia abajo");
+            break;
+        case 4:
+            strcpy(direccion2, "derecha hacia abajo");
+            break;
+        default:
+            printf("Opcion invalida.\n");
+            return 1;
+    }
+
+    float fuerza1_x, fuerza1_y, fuerza2_x, fuerza2_y;
+    calcularFuerza(magnitud1, angulo1, direccion1, &fuerza1_x, &fuerza1_y);
+    calcularFuerza(magnitud2, angulo2, direccion2, &fuerza2_x, &fuerza2_y);
+
+    printf("La fuerza 1 tiene direccion hacia %s y componentes: x = %.2f, y = %.2f\n", direccion1, fuerza1_x, fuerza1_y);
+    printf("La fuerza 2 tiene direccion hacia %s y componentes: x = %.2f, y = %.2f\n", direccion2, fuerza2_x, fuerza2_y);
+
+    return 0;
+}
+
+
+

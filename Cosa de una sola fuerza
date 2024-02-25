@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+#define PI 3.14159265
+
+int main() {
+    float magnitud, angulo;
+    char direccion[20];
+
+    printf("Elija la direccion de la fuerza:\n");
+    printf("1. derecha hacia arriba (+x)\n");
+    printf("2. izquierda hacia arriba (-x)\n");
+    printf("3. izquierda hacia abajo (+y)\n");
+    printf("4. derecha hacia abajo (-y)\n");
+    printf("Ingrese el numero correspondiente: ");
+    int opcion;
+    scanf("%d", &opcion);
+
+    switch (opcion) {
+        case 1:
+            strcpy(direccion, "derecha hacia arriba");
+            break;
+        case 2:
+            strcpy(direccion, "izquierda hacia arriba");
+            break;
+        case 3:
+            strcpy(direccion, "izquierda hacia abajo");
+            break;
+        case 4:
+            strcpy(direccion, "derecha hacia abajo");
+            break;
+        default:
+            printf("Opcion invalida.\n");
+            return 1;
+    }
+
+    printf("Ingrese el angulo de la fuerza en grados: ");
+    scanf("%f", &angulo);
+    printf("Ingrese la magnitud de la fuerza: ");
+    scanf("%f", &magnitud);
+
+    angulo += (opcion - 1) * 90;
+
+    float angulo_radianes = angulo * PI / 180;
+
+    float fuerza_x = magnitud * cos(angulo_radianes);
+    float fuerza_y = magnitud * sin(angulo_radianes);
+
+    printf("La fuerza tiene direccion hacia %s y componentes: x = %.2f, y = %.2f\n", direccion, fuerza_x, fuerza_y);
+
+    return 0;
+}

@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159265
+
+// Función para calcular la suma de fuerzas dados sus componentes x e y
+void calcularSumaFuerzas(float fuerza_x[], float fuerza_y[], int num_fuerzas) {
+    float suma_x = 0, suma_y = 0;
+    
+    // Sumar todas las componentes x e y de las fuerzas
+    for (int i = 0; i < num_fuerzas; ++i) {
+        suma_x += fuerza_x[i];
+        suma_y += fuerza_y[i];
+    }
+    
+    // Calcular la magnitud de la fuerza resultante
+    float magnitud = sqrt(pow(suma_x, 2) + pow(suma_y, 2));
+    
+    // Calcular el ángulo de la fuerza resultante en radianes
+    float angulo = atan2(suma_y, suma_x);
+    
+    // Convertir el ángulo a grados
+    angulo = angulo * 180 / PI;
+    
+    printf("La fuerza resultante es %.2f unidades con un ángulo de %.2f grados.\n", magnitud, angulo);
+}
+
+int main() {
+    int num_fuerzas;
+    printf("Ingrese el número de fuerzas: ");
+    scanf("%d", &num_fuerzas);
+    
+    float fuerza_x[num_fuerzas], fuerza_y[num_fuerzas];
+    float magnitud, angulo;
+    
+    // Obtener la magnitud y el ángulo de cada fuerza y calcular sus componentes x e y
+    for (int i = 0; i < num_fuerzas; ++i) {
+        printf("Ingrese la magnitud de la fuerza %d: ", i + 1);
+        scanf("%f", &magnitud);
+        printf("Ingrese el ángulo de la fuerza %d en grados: ", i + 1);
+        scanf("%f", &angulo);
+        
+        // Convertir el ángulo de grados a radianes
+        angulo = angulo * PI / 180;
+        
+        // Calcular las componentes x e y de la fuerza
+        fuerza_x[i] = magnitud * cos(angulo);
+        fuerza_y[i] = magnitud * sin(angulo);
+    }
+    
+    // Calcular la fuerza resultante con magnitud y ángulo
+    calcularSumaFuerzas(fuerza_x, fuerza_y, num_fuerzas);
+    
+    return 0;
+}
